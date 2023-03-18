@@ -45,7 +45,7 @@ function onlyNumbers(string) {
     console.log(outputNumber)
 }
 
-// 4 функция Функция, возвращает исходную строку, дополненную указанными символами до заданной длины.
+// 4 функция Функция, возвращает исходную строку, дополненную указанными символами до заданной длины..
 function modifiedString(string, length, additionalCharacters) {
     let outputString = string;
     if (outputString.length > length) {
