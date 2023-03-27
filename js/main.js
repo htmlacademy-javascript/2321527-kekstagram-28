@@ -1,10 +1,10 @@
 // 1 ФУНКЦИЯ проверяет длину строки и сверяет с числовым аргументом
 
 function checkLength(string, number) {
-  if (number === string.length) {
-    return (true);
+  if (number >= string.length) {
+    return true;
   } else {
-    return (false);
+    return false;
   }
 }
 checkLength('3456', 3);
@@ -21,9 +21,9 @@ function checkPalindrome(string) {
   }
 
   if (newString === modifiedString) {
-    return (true);
+    return true;
   } else {
-    return (false);
+    return false;
   }
 }
 checkPalindrome('dfgh56789');
@@ -34,15 +34,13 @@ function onlyNumbers(string) {
   let outputNumber = '';
 
   for (let i = 0; i < withoutSpace.length; i++) {
-    let numberPosition = withoutSpace[i];
+    const numberPosition = withoutSpace[i];
 
     if (Number(numberPosition)) {
       outputNumber = outputNumber + numberPosition;
-    } else {
-      numberPosition = '';
     }
   }
-  return(outputNumber);
+  return outputNumber;
 }
 
 onlyNumbers('edrfvtby567');
@@ -51,7 +49,7 @@ onlyNumbers('edrfvtby567');
 function toModifiedString(string, length, additionalCharacters) {
   let outputString = string;
   if (outputString.length > length) {
-    return (outputString);
+    return outputString;
   } else {
     while (outputString.length !== length) {
       if (outputString.length < length && additionalCharacters.length <= length - outputString.length) {
@@ -61,7 +59,7 @@ function toModifiedString(string, length, additionalCharacters) {
       }
     }
   }
-  return (outputString);
+  return outputString;
 }
 
 toModifiedString('e', 4, 'rtyu');
