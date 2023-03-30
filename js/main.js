@@ -29,7 +29,7 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const SIMILAR_WIZARD_COUNT = 25;
+const NUMBER_OBJECT = 25;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -54,25 +54,27 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-const generateId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
-const generatePhotoId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
-const commentsId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
+const generateId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
+const generatePhotoId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
+const commentsId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createWizard = () => ({
+const createComentsObject = () => ({
+  id: commentsId(),
+  avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES)
+});
+
+const createObject = () => ({
   id: generateId(),
   url: `photos/${generatePhotoId()}.jpg`,
   likes: getRandomInteger(15, 200),
   description: getRandomArrayElement(DESCRIPTION),
-  comments: {
-    id: commentsId(),
-    avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
-    name: getRandomArrayElement(NAMES)
-  }
+  comments: Array.from({length: getRandomInteger(2,15)}, createComentsObject),
 });
 
-const similarWizards = Array.from({length: SIMILAR_WIZARD_COUNT}, createWizard);
+const createArray = Array.from({length: NUMBER_OBJECT}, createObject);
 
-console.log(similarWizards);
+console.log(createArray);
