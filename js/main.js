@@ -1,3 +1,71 @@
+// 1 ФУНКЦИЯ проверяет длину строки и сверяет с числовым аргументом
+
+function checkLength(string, number) {
+  if (number === string.length) {
+    return true;
+  } else {
+    return false;
+  }
+}
+checkLength('ew', 4);
+
+// 2 ФУНКЦИЯ проверяет, является ли строка палиндромом
+
+function checkPalindrome(string) {
+  const withoutSpace = string.replaceAll(' ', '');
+  const modifiedStringQ = withoutSpace.toLowerCase();
+  let newString = '';
+  let i = modifiedStringQ.length - 1;
+
+  for (i; i >= 0; i--) {
+    newString = newString + modifiedStringQ[i];
+  }
+
+  if (newString === modifiedStringQ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+checkPalindrome('rtyu');
+
+// 3 функция, которая принимает строку, извлекает цифры и возвращает их в виде целого положительного числа
+
+function onlyNumbers(string) {
+  const withoutSpace = string.replaceAll(' ', '');
+  let outputNumber = '';
+
+  for (let i = 0; i < withoutSpace.length; i++) {
+    let numberPosition = withoutSpace[i];
+    if (Number(numberPosition)) {
+      outputNumber = outputNumber + numberPosition;
+    } else {
+      numberPosition = '';
+    }
+  }
+  return outputNumber;
+}
+onlyNumbers('rty');
+
+
+// 4 функция Функция, возвращает исходную строку, дополненную указанными символами до заданной длины..
+function modifiedString(string, length, additionalCharacters) {
+  let outputString = string;
+  if (outputString.length > length) {
+    return outputString;
+  } else {
+    while (outputString.length !== length) {
+      if (outputString.length < length && additionalCharacters.length <= length - outputString.length) {
+        outputString = additionalCharacters + outputString;
+      } else {
+        additionalCharacters = additionalCharacters.slice(0, -1);
+      }
+    }
+  }
+  return outputString;
+}
+modifiedString('tre', 4, 're');
+
 const NAMES = [
   'Иван',
   'Хуан Себастьян',
@@ -29,7 +97,7 @@ const COMMENTS = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!',
 ];
 
-const SIMILAR_WIZARD_COUNT = 25;
+const NUMBER_OBJECT = 25;
 
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -54,25 +122,27 @@ function createRandomIdFromRangeGenerator (min, max) {
   };
 }
 
-const generateId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
-const generatePhotoId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
-const commentsId = createRandomIdFromRangeGenerator(1, SIMILAR_WIZARD_COUNT);
+const generateId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
+const generatePhotoId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
+const commentsId = createRandomIdFromRangeGenerator(1, NUMBER_OBJECT);
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createWizard = () => ({
+const createComentsObject = () => ({
+  id: commentsId(),
+  avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
+  message: getRandomArrayElement(COMMENTS),
+  name: getRandomArrayElement(NAMES)
+});
+
+const createObject = () => ({
   id: generateId(),
   url: `photos/${generatePhotoId()}.jpg`,
   likes: getRandomInteger(15, 200),
   description: getRandomArrayElement(DESCRIPTION),
-  comments: {
-    id: commentsId(),
-    avatar: `img/avatar-${getRandomInteger(1,6)}.svg`,
-    message: getRandomArrayElement(COMMENTS),
-    name: getRandomArrayElement(NAMES)
-  }
+  comments: Array.from({length: getRandomInteger(2,15)}, createComentsObject),
 });
 
-const similarWizards = Array.from({length: SIMILAR_WIZARD_COUNT}, createWizard);
+const createArray = Array.from({length: NUMBER_OBJECT}, createObject);
 
-console.log(similarWizards);
+console.log(createArray);
