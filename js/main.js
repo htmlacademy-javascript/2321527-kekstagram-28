@@ -1,6 +1,5 @@
 import {createArray} from './data';
-import {checkLength} from './util';
+import {} from './util';
 
 // eslint-disable-next-line
 console.log(createArray);
-
