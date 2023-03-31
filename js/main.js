@@ -9,7 +9,7 @@ function checkLength(string, number) {
 }
 checkLength('ew', 4);
 
-// 2 ФУНКЦИЯ проверяет, является ли строка палиндромом
+// 2 ФУНКЦИЯ проверяет, является ли строка палиндром
 
 function checkPalindrome(string) {
   const withoutSpace = string.replaceAll(' ', '');
